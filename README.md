@@ -1,4 +1,5 @@
 This project is the demo version of [JapanExam.com](https://japanexam.com).
+You can try by access the demo link [here](https://japanexam-react.web.app).
 JapanExam.com is a Japanese learning website, with the aim to provide a variety of practice questions for Japanese Examinations.
 
 ## Functions
