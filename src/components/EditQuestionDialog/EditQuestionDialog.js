@@ -18,6 +18,7 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import OptionsForm from '../OptionsForm'
 import { validateQuestionInputs } from '../../utils/validate'
+import { updateQuestion } from '../../helper/question'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -83,7 +84,7 @@ const EditQuestionDialog = ({ editQuestionOpen, setEditQuestionOpen, question })
     setIsLoading(true)
     setEditQuestionOpen(false)
     try {
-      await questionRef.update({
+      updateQuestion(questionRef, {
         updatedAt: Timestamp.fromDate(new Date()),
         exam,
         category,
@@ -98,9 +99,10 @@ const EditQuestionDialog = ({ editQuestionOpen, setEditQuestionOpen, question })
         }),
         explanation
       })
-      setIsLoading(false)
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
   return (

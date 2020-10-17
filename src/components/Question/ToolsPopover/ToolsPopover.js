@@ -9,6 +9,7 @@ import BookmarkRoundedIcon from '@material-ui/icons/BookmarkRounded'
 import EditRoundedIcon from '@material-ui/icons/EditRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import { useFirestore, useUser } from 'reactfire'
+import { removeQuestion } from '../../../helper/question'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -26,7 +27,7 @@ const ToolsPopover = ({ question, anchorEl, setAnchorEl, setEditQuestionOpen }) 
   // Delete Question from DB
   const deleteQuestion = async () => {
     try {
-      await questionRef.delete()
+      await removeQuestion(questionRef)
     } catch (error) {
       console.log(error)
     }
