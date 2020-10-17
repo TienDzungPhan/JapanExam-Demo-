@@ -19,6 +19,7 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import OptionsForm from '../OptionsForm'
 import { validateQuestionInputs } from '../../utils/validate'
+import { addQuestion } from '../../helper/question'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -86,7 +87,7 @@ const CreateQuestionDialog = ({ createQuestionOpen, setCreateQuestionOpen }) => 
     setIsLoading(true)
     setCreateQuestionOpen(false)
     try {
-      await questionsRef.add({
+      await addQuestion(questionsRef, {
         authorId: currentUser.uid,
         authorName: currentUser.displayName,
         createdAt: Timestamp.fromDate(new Date()),
@@ -101,13 +102,12 @@ const CreateQuestionDialog = ({ createQuestionOpen, setCreateQuestionOpen }) => 
             isCorrect: option === correctAnswer,
             selectedCount: 0
           }
-        }),
-        explanation,
-        answersCount: 0
+        })
       })
-      setIsLoading(false)
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
   return (
